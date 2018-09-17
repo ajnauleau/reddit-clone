@@ -1,0 +1,178 @@
+/* ROOT REDDIT */
+
+* {
+  font-family: 'Lato', Helvetica, sans-serif;
+  /*color: #333447;*/
+  line-height: 1.5;
+}
+
+body {
+  background-color: lightskyblue;
+}
+
+
+h1 {
+  text-align: center;
+}
+
+input {
+  padding: 0.5em 0.6em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 300px;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+button {
+  height: 31px;
+  width: 110px;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 200;
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  border: 1px solid #fe7880;
+  color: #fe7880;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border: solid lightgrey 0.25px;
+  padding 1em;
+  background-color: white;
+}
+
+.feed {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+}
+
+.post {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  float: right;
+}
+
+.front page {
+  background: #aaaaaa;
+  overflow: hidden;
+}
+
+.footer {
+  text-align: right;
+}
+
+
+/***********
+NAVBAR
+***********/
+
+.navbar {
+  z-index: 10;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+
+.nav-links {
+  height: 50px;
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-btn {
+  text-decoration: none;
+  list-style-type: none;
+  color: black;
+  margin-left: 2rem;
+  transition: all 200ms;
+}
+
+.nav-btn:hover {
+  transform: scale(1.1);
+}
+
+.nav-btn.logo {
+  margin-top: 1%;
+  transition: all 300ms;
+}
+
+.nav-btn.logo:hover {
+  transform: scale(0.95);
+}
+
+.nav-btn.right {
+  margin-left: 85%;
+  transition: all 300ms;
+}
+
+.nav-btn.right:hover {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/********
+  hero
+********/
+
+.hero {
+  height: 120px;
+  width: 210px;
+  text-align: center;
+  background: url('/assets/reddit-post.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  float: right;
+}
+
+.hero-overlay-text {
+  z-index: 5;
+  height: calc(120vh - 600px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hero-overlay-text h1 {
+  margin-top: 0rem;
+  font-size: 10rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.call-to-action-btn {
+  border-color: rgba(253, 253, 253, 1);
+  color: #000000;
+  border-radius: 40px;
+  float: bottom;
+}
+
+/**********
+   MAIN
+**********/
+
+.reddit {
+  padding-top: 1em;
+}

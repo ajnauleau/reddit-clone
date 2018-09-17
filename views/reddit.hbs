@@ -1,0 +1,33 @@
+
+<!-- reddit.handlebars -->
+
+<body>
+<div class="front page">
+    <a href="/posts/"><p class="reddit"><strong>reddit-feed</strong></p></a>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="feed">
+                <ul>
+                    {{#each posts}}<!-- replace with feed -->
+                        <li class="list-group-item">
+                            <div class="lead"><a href="/posts/{{this._id}}">{{this.title}}</a></div>
+                            <a href="{{this.url}}">{{this.url}}</a>
+                            <div class="text-right">
+                                <a href="/n/{{this.subreddit}}">{{this.subreddit}}</a>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <div class="hero">
+            <div class="hero-overlay-text">
+                <a href="/posts/new/" class="call-to-action-btn">CREATE POST</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

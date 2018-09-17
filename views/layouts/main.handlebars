@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reddit</title>
+    <!-- Local stylesheet directory and files -->
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<!-- main.handlebars -->
+<body>
+<!--<div class="nav-bar">-->
+    <!--<nav>-->
+        <!--<a class="nav-btn logo" href="reddit"><img height="50px" src="/assets/reddit-logo.png"></a>-->
+        <!--<a class="nav-btn right" href="/"><img height="40px" src="/assets/home-logo.png"></a>-->
+        <!--<a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>-->
+    <!--</nav>-->
+<!--</div>-->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <a class="nav-btn logo" href="reddit"><img height="50px" src="/assets/reddit-logo.png"></a>
+        <a class="nav-btn right" href="/"><img height="40px" src="/assets/home-logo.png"></a>
+        <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/sign-up">Sign Up</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {{{body}}}
+</div>
+
+</body>
+</html>

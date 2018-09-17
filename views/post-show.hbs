@@ -1,0 +1,46 @@
+
+<!-- post-show.handlebars -->
+<body>
+    <div class="front page">
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <a href="{{post.url}}" class="lead">{{post.title}}</a>
+                    <p>{{post.summary}}</p>
+                </div>
+            </div>
+
+            <form action="/posts/{{post._id}}/comments" method="post">
+                <textarea class='form-control' name="content" placeholder="Comment"></textarea>
+                <div class="text-right">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+
+            {{#each post.comments}}
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <p>{{this.content}}</p>
+                </div>
+            </div>
+            {{/each}}
+
+            <div class="post">
+                <div class="hero">
+                    <div class="hero-overlay-text">
+                        <a href="/posts/new/" class="call-to-action-btn">CREATE POST</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="footer">
+                <div class="hero-overlay-text">
+                    <h1>Feed</h1>
+                    <a href="/posts/" class="call-to-action-btn">BACK TO FEED</a>
+                </div>
+            </div>
+
+    </div>
+</body>
