@@ -27,14 +27,20 @@
     <div class="container">
         <a class="nav-btn logo" href="reddit"><img height="50px" src="/assets/reddit-logo.png"></a>
         <a class="nav-btn right" href="/"><img height="40px" src="/assets/home-logo.png"></a>
-        <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+        {{#if currentUser}}
+            <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+        {{/if}}
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout">Logout</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/sign-up">Sign Up</a></li>
+            {{#if currentUser}}
+                <li><a href="/logout">Logout</a></li>
+            {{else}}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/sign-up">Sign Up</a></li>
+            {{/if}}
         </ul>
     </div>
 </nav>
+
 <div class="container">
     {{{body}}}
 </div>

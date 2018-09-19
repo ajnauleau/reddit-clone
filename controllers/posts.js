@@ -1,6 +1,7 @@
 // Validate your forms with express-validator
 const express = require('express');
 const Post = require('../models/post');
+const User = require('../models/user');
 
 const app = app => {
   /**********************************************
@@ -8,14 +9,16 @@ const app = app => {
    /**********************************************/
 
   app.get('/posts/new', function(req, res) {
-    res.render('posts-new');
+    const currentUser = req.user;
+    res.render('posts-new', { currentUser });
   });
 
-  //error with Post.find({})
   app.get('/posts', (req, res) => {
+    const currentUser = req.user;
     Post.find({})
+      .populate('author')
       .then(posts => {
-        res.render('reddit.hbs', { posts });
+        res.render('reddit.hbs', { posts, currentUser });
       })
       .catch(err => {
         console.log(err.message);
@@ -23,11 +26,15 @@ const app = app => {
   });
 
   app.get('/posts/:id', function(req, res) {
+    const currentUser = req.user;
+
     // LOOK UP THE POST
     Post.findById(req.params.id)
       .populate('comments')
+      .populate('author')
+      .populate('comments.author')
       .then(post => {
-        res.render('post-show.hbs', { post });
+        res.render('post-show.hbs', { post, currentUser });
       })
       .catch(err => {
         console.log(err.message);
@@ -36,10 +43,11 @@ const app = app => {
 
   // SUBREDDIT
   app.get('/n/:subreddit', function(req, res) {
+    const currentUser = req.user;
     console.log(req.params.subreddit);
     Post.findById(req.params.id)
       .then(post => {
-        res.render('post-show.hbs', { post });
+        res.render('post-show.hbs', { post, currentUser });
       })
       .catch(err => {
         console.log(err.message);
@@ -51,25 +59,71 @@ const app = app => {
    /**********************************************/
 
   // CREATE
+  app.post('/posts', (req, res) => {
+    if (req.user) {
+      const postBody = req.body;
+      console.log(postBody);
+
+      // INSTANTIATE INSTANCE OF POST MODEL
+      const post = new Post(req.body);
+      post.author = req.user._id;
+
+      // SAVE INSTANCE OF POST MODEL TO DB
+      post
+        .save()
+        .then(post => {
+          return User.findById(req.user._id);
+        })
+        .then(user => {
+          user.posts.unshift(post);
+          user.save();
+          // REDIRECT TO THE NEW POST
+          res.redirect('/posts/' + post._id);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    } else {
+      return res.status(401); // UNAUTHORIZED
+    }
+  });
+
+  // CREATE
   app.post('/posts/new', function(req, res) {
-    const postBody = req.body;
-    console.log(postBody);
+    if (req.user) {
+      const postBody = req.body;
+      console.log(postBody);
 
-    // INSTANTIATE INSTANCE OF POST MODEL
-    var post = new Post(req.body);
+      // INSTANTIATE INSTANCE OF POST MODEL
+      const post = new Post(req.body);
+      post.author = req.user._id;
 
-    // SAVE INSTANCE OF POST MODEL TO DB
-    post.save((err, post) => {
-      // REDIRECT TO THE ROOT
-      return res.redirect(`/posts`);
-    });
+      // SAVE INSTANCE OF POST MODEL TO DB
+      post
+        .save()
+        .then(post => {
+          return User.findById(req.user._id);
+        })
+        .then(user => {
+          user.posts.unshift(post);
+          user.save();
+          // REDIRECT TO THE NEW POST
+          res.redirect('/posts/' + post._id);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    } else {
+      return res.status(401); // UNAUTHORIZED
+    }
   });
 
   // SUBREDDIT
   app.post('/n/:subreddit', function(req, res) {
+    const currentUser = req.user;
     Post.find({ subreddit: req.params.subreddit })
       .then(posts => {
-        res.render('reddit.hbs', { posts });
+        res.render('reddit.hbs', { posts, currentUser });
       })
       .catch(err => {
         console.log(err);
@@ -78,27 +132,3 @@ const app = app => {
 };
 
 module.exports = app;
-
-/*
-module.exports = app => {
-  Post.find({})
-    .then(feed => {
-      res.render('posts-index.hbs', { posts });
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
-
-  // CREATE
-  app.post('/posts', (req, res) => {
-    // INSTANTIATE INSTANCE OF POST MODEL
-    var post = new Post(req.body);
-
-    // SAVE INSTANCE OF POST MODEL TO DB
-    post.save((err, post) => {
-      // REDIRECT TO THE ROOT
-      return res.redirect(`/`);
-    });
-  });
-};
-*/

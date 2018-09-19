@@ -11,6 +11,7 @@ const PostSchema = new Schema({
   anonymous: { type: Boolean, required: false },
   image: { data: Buffer, contentType: String, required: false },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 PostSchema.pre('save', next => {

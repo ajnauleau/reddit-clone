@@ -88,7 +88,7 @@ A User holds basic information about a user including name and password.
 
 Voting is handled via AJAX by calling a route via JavaScript/jQuery.
 
-- Be sure to import jQuery to handle sending AJAX messages. I included jQuery in the `views/layouts.main.hbs`
+- Be sure to import jQuery to handle sending AJAX messages. I included jQuery in the `views/layouts.main.handlebars`
 
 At the moment voting is calculated by keeping an array of **up** votes and **down** votes. Each post model
 defines an `upVotes`, `downVotes`, and `voteScore` property. When a user up or down votes a post

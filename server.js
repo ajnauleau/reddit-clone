@@ -33,11 +33,6 @@ app.set('view engine', 'hbs');
 // --------------------------------------------------------
 /** Start the app */
 // --------------------------------------------------------
-// app.listen(3000, () => {
-//   console.log('Server is running on port 3000');
-// });
-
-// const DEFAULT_PORT = 3000;
 
 app.set('port', process.env.PORT);
 app.set('port', 3000);
@@ -47,6 +42,27 @@ if (!module.parent) {
     console.log('Server is running on port 3000');
   });
 }
+
+// --------------------------------------------------------
+/** Check for Auth */
+// --------------------------------------------------------
+
+const checkAuth = (req, res, next) => {
+  console.log('Checking authentication');
+  if (
+    typeof req.cookies.nToken === 'undefined' ||
+    req.cookies.nToken === null
+  ) {
+    req.user = null;
+  } else {
+    const token = req.cookies.nToken;
+    const decodedToken = jwt.decode(token, { complete: true }) || {};
+    req.user = decodedToken.payload;
+  }
+
+  next();
+};
+app.use(checkAuth);
 
 // --------------------------------------------------------
 /** Define routes */
@@ -67,9 +83,21 @@ require('./controllers/posts-api')(app);
  / Home Route: Get
  /**********************************************/
 
+const Post = require('./models/post');
+
 app.get('/', (req, res) => {
-  res.render('reddit');
-  /*
+  const currentUser = req.user;
+
+  Post.find({})
+    .then(posts => {
+      res.render('reddit.hbs', { posts, currentUser });
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+});
+
+/*
   const currentUser = req.user;
   let message = "";
   let loggedin = "loggedout";
@@ -89,7 +117,6 @@ app.get('/', (req, res) => {
     message: message
   });
   */
-});
 
 /* Currently testing and developing
 app.get('/', function(req, res) {

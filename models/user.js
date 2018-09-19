@@ -7,6 +7,8 @@ const UserSchema = new Schema({
   updatedAt: { type: Date },
   password: { type: String, select: false },
   username: { type: String, required: true },
+  posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 // Must use function here! ES6 => functions do not bind this!
@@ -31,7 +33,7 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-UserSchema.methods.comparePassword = (password, done) => {
+UserSchema.methods.comparePassword = function(password, done) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     done(err, isMatch);
   });

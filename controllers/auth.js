@@ -1,12 +1,13 @@
 // Validate your forms with express-validator
-const express = require('express');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const app = app => {
   // SIGN UP FORM
   app.get('/sign-up', (req, res) => {
-    res.render('auth-new');
+    const currentUser = req.user;
+    res.render('auth-new', { currentUser });
   });
 
   // SIGN UP POST
@@ -31,7 +32,8 @@ const app = app => {
 
   // LOGIN FORM
   app.get('/login', (req, res) => {
-    res.render('login.hbs');
+    const currentUser = req.user;
+    res.render('auth-show.hbs', { currentUser });
   });
 
   // LOGIN
@@ -39,7 +41,7 @@ const app = app => {
     const username = req.body.username;
     const password = req.body.password;
     // Find this user name
-    User.findOne({ username }, 'username password')
+    User.findOne({ username }, { username, password })
       .then(user => {
         if (!user) {
           // User not found
@@ -47,13 +49,12 @@ const app = app => {
             .status(401)
             .send({ message: 'Wrong Username or Password' });
         }
+
         // Check the password
         user.comparePassword(password, (err, isMatch) => {
           if (!isMatch) {
             // Password does not match
-            return res
-              .status(401)
-              .send({ message: 'Wrong Username or password' });
+            return res.status(401).send({ message: 'Passwords dont match' });
           }
           // Create a token
           const token = jwt.sign(

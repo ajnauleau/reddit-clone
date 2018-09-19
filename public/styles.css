@@ -34,13 +34,11 @@ button {
   height: 31px;
   width: 110px;
   text-align: center;
-  color: #fff;
   font-size: 1rem;
   font-weight: 200;
   background: transparent;
-  border: 1px solid #fff;
   border-radius: 4px;
-  margin: 20px 0;
+  margin: 1em;
   cursor: pointer;
   transition: all 0.3s ease;
   outline: none;
@@ -79,10 +77,22 @@ button {
   text-align: right;
 }
 
+/*********
+POSTS
+********/
+
+.light {
+  color: lightgrey;
+}
+
+.post {
+
+}
 
 /***********
 NAVBAR
 ***********/
+
 
 .navbar {
   z-index: 10;
@@ -108,8 +118,9 @@ NAVBAR
   transition: all 200ms;
 }
 
+
 .nav-btn:hover {
-  transform: scale(1.1);
+
 }
 
 .nav-btn.logo {
@@ -118,7 +129,7 @@ NAVBAR
 }
 
 .nav-btn.logo:hover {
-  transform: scale(0.95);
+
 }
 
 .nav-btn.right {

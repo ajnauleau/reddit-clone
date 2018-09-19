@@ -5,6 +5,7 @@
 
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
+                    <p class="light">Posted by /u/{{#each post.author}}{{this.username}}{{/each}}</p>
                     <a href="{{post.url}}" class="lead">{{post.title}}</a>
                     <p>{{post.summary}}</p>
                 </div>
@@ -20,6 +21,7 @@
             {{#each post.comments}}
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-2">
+                    <p class="light"> {{this.author}}</p>
                     <p>{{this.content}}</p>
                 </div>
             </div>
