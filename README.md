@@ -1,7 +1,6 @@
 # reddit-clone
 
-This is clone of a Reddit built with Node and Express JS. This was built following the tutorial
-[here](https://www.makeschool.com/online-courses/tutorials/reddit-clone-in-node-js/technical-planning).
+This is a clone of Reddit built with Node, JSON Web Tokens (JWT), MongoDB, and Express JS.
 
 In general this creates a simple blog or form with categories, comments and voting.
 
