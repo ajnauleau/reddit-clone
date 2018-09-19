@@ -30,9 +30,6 @@ const app = app => {
 
     // LOOK UP THE POST
     Post.findById(req.params.id)
-      .populate('comments')
-      .populate('author')
-      .populate('comments.author')
       .then(post => {
         res.render('post-show.hbs', { post, currentUser });
       })

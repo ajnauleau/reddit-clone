@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Comment = require('./comment');
 
 const PostSchema = new Schema({
   createdAt: { type: Date },
@@ -10,7 +11,7 @@ const PostSchema = new Schema({
   summary: { type: String, required: true },
   anonymous: { type: Boolean, required: false },
   image: { data: Buffer, contentType: String, required: false },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  comments: [Comment.schema],
   author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
