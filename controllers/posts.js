@@ -8,11 +8,6 @@ const app = app => {
    / Posts Route: Get
    /**********************************************/
 
-  app.get('/posts/new', function(req, res) {
-    const currentUser = req.user;
-    res.render('posts-new', { currentUser });
-  });
-
   app.get('/posts', (req, res) => {
     const currentUser = req.user;
     Post.find({})
@@ -25,11 +20,17 @@ const app = app => {
       });
   });
 
+  app.get('/posts/new', function(req, res) {
+    const currentUser = req.user;
+    res.render('posts-new', { currentUser });
+  });
+
   app.get('/posts/:id', function(req, res) {
     const currentUser = req.user;
 
     // LOOK UP THE POST
     Post.findById(req.params.id)
+      .populate('author')
       .then(post => {
         res.render('post-show.hbs', { post, currentUser });
       })
@@ -42,12 +43,14 @@ const app = app => {
   app.get('/n/:subreddit', function(req, res) {
     const currentUser = req.user;
     console.log(req.params.subreddit);
-    Post.findById(req.params.id)
-      .then(post => {
-        res.render('post-show.hbs', { post, currentUser });
+    const subreddit = req.params.subreddit;
+    Post.find({ subreddit: req.params.subreddit })
+      .populate('author')
+      .then(posts => {
+        res.render('reddit.hbs', { posts, currentUser, subreddit });
       })
       .catch(err => {
-        console.log(err.message);
+        console.log(err);
       });
   });
 
@@ -118,12 +121,15 @@ const app = app => {
   // SUBREDDIT
   app.post('/n/:subreddit', function(req, res) {
     const currentUser = req.user;
+    console.log(req.params.subreddit);
+    const subreddit = req.params.subreddit;
     Post.find({ subreddit: req.params.subreddit })
-      .then(posts => {
-        res.render('reddit.hbs', { posts, currentUser });
+      .populate('author')
+      .then(post => {
+        res.render('post-show.hbs', { post, currentUser, subreddit });
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
       });
   });
 };

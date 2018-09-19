@@ -89,6 +89,7 @@ app.get('/', (req, res) => {
   const currentUser = req.user;
 
   Post.find({})
+    .populate('author')
     .then(posts => {
       res.render('reddit.hbs', { posts, currentUser });
     })

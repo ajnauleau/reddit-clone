@@ -23,7 +23,7 @@ const app = app => {
       .then(post => {
         post.comments.unshift(comment);
         // Temp fix wrong user should be postId's user
-        post.author = req.user_id;
+        //post.author = req.user_id;
         return post.save();
       })
       .then(comment => {
