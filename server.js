@@ -72,10 +72,9 @@ app.use(checkAuth);
 require('./controllers/posts')(app);
 require('./controllers/comments')(app);
 require('./controllers/auth')(app);
+require('./controllers/replies')(app);
 
 /* Not Defined
-require('./controllers/user')(app);
-require('./controllers/replies')(app);
 require('./controllers/posts-api')(app);
 */
 

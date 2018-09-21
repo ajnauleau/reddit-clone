@@ -12,7 +12,7 @@ const app = app => {
         return Comment.findById(req.params.commentId);
       })
       .then(comment => {
-        res.render('replies-new', { post, comment });
+        res.render('replies-new.hbs', { post, comment });
       })
       .catch(err => {
         console.log(err.message);
