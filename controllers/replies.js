@@ -21,7 +21,23 @@ const app = app => {
 
   // CREATE REPLY
   app.post('/posts/:postId/comments/:commentId/replies', (req, res) => {
-    console.log(req.body);
+    // LOOKUP THE PARENT POST
+    Post.findById(req.params.postId)
+      .then(post => {
+        // FIND THE CHILD COMMENT
+        const comment = post.comments.id(req.params.commentId);
+        // ADD THE REPLY
+        comment.comments.unshift(req.body);
+        // SAVE THE CHANGE TO THE PARENT DOCUMENT
+        return post.save();
+      })
+      .then(post => {
+        // REDIRECT TO THE PARENT POST#SHOW ROUTE
+        res.redirect('/posts/' + post._id);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   });
 };
 

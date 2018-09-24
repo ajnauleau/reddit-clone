@@ -187,3 +187,11 @@ NAVBAR
 .reddit {
   padding-top: 1em;
 }
+
+/*********
+ COMMENTS
+********/
+
+.comment-indent {
+  margin-left: 10px;
+}
