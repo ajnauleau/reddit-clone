@@ -136,5 +136,6 @@ app.post('/posts/new/', function(req, res) {
 });
 */
 
-// Export app
+/** Export app **/
+
 module.exports = app;

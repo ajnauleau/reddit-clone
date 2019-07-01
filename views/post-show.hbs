@@ -1,5 +1,5 @@
 
-Handlebars.registerPartial('partials', '{{partials/comment}}')
+<!--Handlebars.registerPartial('partials', '{{partials/comment}}'-->
 
 <!-- post-show.handlebars -->
 
@@ -20,8 +20,6 @@ Handlebars.registerPartial('partials', '{{partials/comment}}')
                 </div>
             </form>
 
-
-
             {{#each post.comments}}
                 {{const id = post._id}}
             <div class="row">
@@ -35,11 +33,10 @@ Handlebars.registerPartial('partials', '{{partials/comment}}')
             {{/each}}
 
             <div class="row">
-                {{#each post.comments}}
-                    {{> partials}}
-                {{/each}}
+            {{#each post.comments}}
+                {{> partials/comment}}
+            {{/each}}
             </div>
-
 
             <div class="post">
                 <div class="hero">
