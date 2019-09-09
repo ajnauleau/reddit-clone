@@ -20,27 +20,19 @@
                 </div>
             </form>
 
-            {{#each post.comments}}
-                {{const id = post._id}}
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-2">
-                    <p class="light"> {{this.author}}</p>
-                    <p>{{this.content}}</p>
-                    <a href="/posts/{{id}}/comments/{{this._id}}/replies/new">Reply</a>
-                    <p>&nbsp&nbsp {{this.replies}}</p>
-                </div>
-            </div>
-            {{/each}}
+        {{#each post.comments}}
+            {{> comment comment=this postId=../post._id}}
+        {{/each}}
 
-            <div class="row">
-            {{#each post.comments}}
-                {{> partials/comment}}
-            {{/each}}
-            </div>
+        <!-- Partial doesn't work -->
+
+
+
 
             <div class="post">
                 <div class="hero">
                     <div class="hero-overlay-text">
+                        <br>
                         <a href="/posts/new/" class="call-to-action-btn">CREATE POST</a>
                     </div>
                 </div>

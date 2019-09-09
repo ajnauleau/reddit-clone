@@ -3,12 +3,14 @@
 <head>
     <meta charset="utf-8">
     <title>Reddit</title>
-    <!-- Local stylesheet directory and files -->
-    <link rel="stylesheet" href="../../public/styles.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Local stylesheet directory and files -->
+    <link rel="stylesheet" href="../../public/styles.css" type="text/css">
+    <link rel="stylesheet" href="/public/all.css">
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -25,7 +27,7 @@
 <!--</div>-->
 <nav class="navbar navbar-default">
     <div class="container">
-        <a class="nav-btn logo" href="reddit"><img height="50px" src="/assets/reddit-logo.png"></a>
+        <a class="nav-btn logo" href="/"><img height="50px" src="/assets/reddit-logo.png"></a>
         <a class="nav-btn right" href="/"><img height="40px" src="/assets/home-logo.png"></a>
         {{#if currentUser}}
             <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>

@@ -1,6 +1,7 @@
 // Fill requirements
 const express = require('express');
 const exphbs = require('express-handlebars');
+const hbs = require('hbs')
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
@@ -26,8 +27,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator()); // Add after Body parser!
 
+hbs.registerPartials(__dirname + '/views/partials');
+
 // Establish main hbs layout
-app.engine('hbs', exphbs({ defaultLayout: 'main' }));
+app.engine('hbs', exphbs({ defaultLayout: 'main'}));
+app.set('views', (__dirname + '/views'));
 app.set('view engine', 'hbs');
 
 // --------------------------------------------------------
