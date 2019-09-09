@@ -1,4 +1,3 @@
-/* ROOT REDDIT */
 
 * {
   font-family: 'Lato', Helvetica, sans-serif;
@@ -89,6 +88,10 @@ POSTS
 
 }
 
+.voting-container {
+  display: flex;
+}
+
 /***********
 NAVBAR
 ***********/
@@ -149,7 +152,7 @@ NAVBAR
   height: 120px;
   width: 210px;
   text-align: center;
-  background: url('/assets/reddit-post.png');
+  background: url('/public/assets/reddit-post.png');
   background-size: contain;
   background-repeat: no-repeat;
   float: right;

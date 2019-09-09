@@ -13,6 +13,9 @@ const PostSchema = new Schema({
   image: { data: Buffer, contentType: String, required: false },
   comments: [Comment.schema],
   author: { type: Schema.Types.ObjectId, ref: 'User' },
+  upVotes : [{ type: Schema.Types.ObjectId, ref: "User"}],
+  downVotes : [{ type: Schema.Types.ObjectId, ref: "User"}],
+  voteScore : {type: Number}
 });
 
 PostSchema.pre('save', next => {

@@ -20,7 +20,7 @@ app.use(cookieParser());
 require('./data/reddit-clone-db');
 
 // Set up a static directory
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // Use Body Parser
 app.use(bodyParser.json());
@@ -31,7 +31,9 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 // Establish main hbs layout
 app.engine('hbs', exphbs({ defaultLayout: 'main'}));
-app.set('views', (__dirname + '/views'));
+
+//app.set('views', (__dirname + '/views'));
+
 app.set('view engine', 'hbs');
 
 // --------------------------------------------------------

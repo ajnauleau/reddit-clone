@@ -65,8 +65,11 @@ const app = app => {
       console.log(postBody);
 
       // INSTANTIATE INSTANCE OF POST MODEL
-      const post = new Post(req.body);
+      var post = new Post(req.body);
       post.author = req.user._id;
+      post.upVotes = [];
+      post.downVotes = [];
+      post.voteScore = 0;
 
       // SAVE INSTANCE OF POST MODEL TO DB
       post
@@ -95,8 +98,11 @@ const app = app => {
       console.log(postBody);
 
       // INSTANTIATE INSTANCE OF POST MODEL
-      const post = new Post(req.body);
+      var post = new Post(req.body);
       post.author = req.user._id;
+      post.upVotes = [];
+      post.downVotes = [];
+      post.voteScore = 0;
 
       // SAVE INSTANCE OF POST MODEL TO DB
       post
@@ -132,6 +138,31 @@ const app = app => {
         console.log(err.message);
       });
   });
+
+  /**********************************************
+   / Puts Route: Put
+   /**********************************************/
+
+  app.put("/posts/:id/vote-up", function(req, res) {
+    Post.findById(req.params.id).exec(function(err, post) {
+      post.upVotes.push(req.user._id);
+      post.voteScore = Number(post.voteScore + 1);
+      post.save();
+
+      res.status(200);
+    });
+  });
+
+  app.put("/posts/:id/vote-down", function(req, res) {
+    Post.findById(req.params.id).exec(function(err, post) {
+      post.downVotes.push(req.user._id);
+      post.voteScore = Number(post.voteScore - 1);
+      post.save();
+
+      res.status(200);
+    });
+  });
+
 };
 
 module.exports = app;

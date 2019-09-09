@@ -20,21 +20,46 @@ const app = app => {
   });
 
   // CREATE REPLY
-  app.post('/posts/:postId/comments/:commentId/replies', (req, res) => {
+  app.post("/posts/:postId/comments/:commentId/replies", (req, res) => {
+    // TURN REPLY INTO A COMMENT OBJECT
+    const reply = new Comment(req.body);
+    reply.author = req.user._id
     // LOOKUP THE PARENT POST
     Post.findById(req.params.postId)
       .then(post => {
         // FIND THE CHILD COMMENT
-        const comment = post.comments.id(req.params.commentId);
-        // ADD THE REPLY
-        comment.comments.unshift(req.body);
+        Promise.all([
+          reply.save(),
+          Comment.findById(req.params.commentId),
+        ])
+          .then(([reply, comment]) => {
+            // ADD THE REPLY
+            comment.comments.unshift(reply._id);
+
+            return Promise.all([
+              comment.save(),
+            ]);
+          })
+          .then(() => {
+            res.redirect(`/posts/${req.params.postId}`);
+          })
+          .catch(console.error);
         // SAVE THE CHANGE TO THE PARENT DOCUMENT
         return post.save();
       })
-      .then(post => {
-        // REDIRECT TO THE PARENT POST#SHOW ROUTE
-        res.redirect('/posts/' + post._id);
+  });
+
+  // Temporary Fix
+  app.get("/posts/:postId/comments/:commentId/replies", (req, res) => {
+    let post;
+    Post.findById(req.params.postId)
+      .then(p => {
+        post = p;
+        return Comment.findById(req.params.commentId);
       })
+      .then(() => {
+      res.redirect(`/posts/${req.params.postId}`);
+    })
       .catch(err => {
         console.log(err.message);
       });
