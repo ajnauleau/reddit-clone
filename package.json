@@ -16,7 +16,7 @@
     "express-validator": "^5.3.1",
     "handlebars": "^4.1.2",
     "hbs": "^4.0.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongo-db": "^1.0.2",
     "mongodb": "^3.3.0",
     "mongoose": "^5.6.9"
